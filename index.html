@@ -1,0 +1,314 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Practical Of Data Science</title>
+</head>
+
+<body>
+
+    <h1>Practical 1: Installation of RStudio & Basics of R</h1>
+    <p>In this practical, we will cover the basics of R programming language.</p>
+    
+    <h2>1. Simple variable declaration</h2>
+    <pre><code>
+x <- 10
+y <- "Hello, world!"
+    </code></pre>
+
+    <h2>2. For Loop</h2>
+    <pre><code>
+for (i in 1:5) {
+  print(i)
+}
+    </code></pre>
+
+    <h2>3. Paste</h2>
+    <pre><code>
+paste("Hello", "world!", sep = ", ")
+    </code></pre>
+
+    <h2>4. Declaration of multiple variables</h2>
+    <pre><code>
+a <- 5
+b <- 7
+c <- a + b
+    </code></pre>
+
+    <h2>5. If else statement</h2>
+    <pre><code>
+x <- 10
+if (x > 5) {
+  print("x is greater than 5")
+} else {
+  print("x is less than or equal to 5")
+}
+    </code></pre>
+
+    <h2>6. Maximum of 2 numbers</h2>
+    <pre><code>
+max_num <- function(a, b) {
+  if (a > b) {
+    return(a)
+  } else {
+    return(b)
+  }
+}
+max_num(10, 20)
+    </code></pre>
+
+    <h2>7. Vector of strings</h2>
+    <pre><code>
+names <- c("Alice", "Bob", "Charlie")
+print(names)
+    </code></pre>
+
+    <h1>Practical 2: Time Series Analysis</h1>
+    <p>In this practical, we will perform time series analysis using R.</p>
+
+    <h2>Aim: Time Series</h2>
+    <p>Time Series Analysis in R is used to see how an object behaves over a period of time. In R Programming Language,
+        it can be easily done by the <code>ts()</code> function with some parameters. Time series takes the data vector
+        and each data is connected with a timestamp value as given by the user. This function is mostly used to learn
+        and forecast the behavior of an asset in business for a period of time. For example, sales analysis of a
+        company, inventory analysis, price analysis of a particular stock or market, population analysis, etc.</p>
+    <p><strong>Syntax:</strong> <code>objectName <- ts(data, start, end, frequency)</code></p>
+    <p>where,</p>
+    <ul>
+        <li><code>data</code> – represents the data vector</li>
+        <li><code>start</code> – represents the first observation in time series</li>
+        <li><code>end</code> – represents the last observation in time series</li>
+        <li><code>frequency</code> – represents the number of observations per unit time. For example,
+            <code>frequency=1</code> for monthly data.
+        </li>
+    </ul>
+    <h2>R Code</h2>
+    <pre><code>
+# Rainfall
+rainfall <- c(100, 200, 300, 400, 500, 600, 70, 800, 900, 1000)
+rainfall.timeseries <- ts(rainfall, start = c(2012, 1), frequency = 12)
+print(rainfall.timeseries)
+
+png(file = "rainfall.png")
+plot(rainfall.timeseries, main = "Rainfall Time Series")
+dev.off()
+    </code></pre>
+    <h1>Practical 3: Time Series Frequency Analysis</h1>
+    <p>In this practical, we will perform time series frequency analysis using R.</p>
+
+    <h2>Aim: Time Series Frequency Analysis</h2>
+    <p>Time Series Analysis in R is used to see how an object behaves over a period of time. In R Programming Language,
+        it can be easily done by the <code>ts()</code> function with some parameters. Time series takes the data vector
+        and each data is connected with a timestamp value as given by the user. This function is mostly used to learn
+        and forecast the behavior of an asset in business for a period of time. For example, sales analysis of a
+        company, inventory analysis, price analysis of a particular stock or market, population analysis, etc.</p>
+    <p><strong>Syntax:</strong> <code>abline(a=NULL, b=NULL, h=NULL, v=NULL, …)</code></p>
+    <p><strong>Parameters:</strong></p>
+    <ul>
+        <li><code>a, b:</code> It specifies the intercept and the slope of the line</li>
+        <li><code>h:</code> specifies y-value for horizontal line(s)</li>
+        <li><code>v:</code> specifies x-value(s) for vertical line(s)</li>
+    </ul>
+    <p><strong>Returns:</strong> a straight line in the plot</p>
+
+    <h2>R Code</h2>
+    <h3>A] Air Passenger</h3>
+    <pre><code>
+data("AirPassengers")
+class(AirPassengers)
+start(AirPassengers)
+end(AirPassengers)
+frequency(AirPassengers)
+summary(AirPassengers)
+plot(AirPassengers)
+abline(reg = lm(AirPassengers ~ time(AirPassengers)))
+cycle(AirPassengers)
+boxplot(AirPassengers ~ cycle(AirPassengers))
+    </code></pre>
+
+    <h3>B] Cars</h3>
+    <pre><code>
+data("cars")
+class(cars)
+head(cars)
+tail(cars)
+start(cars)
+frequency(cars)
+summary(cars)
+plot(cars)
+reg <- lm(dist  ~ speed, data = cars)
+plot(cars)
+plot(reg)
+    </code></pre>
+
+    <h1>Practical 4: Analysis of Variance (ANOVA TESTS)</h1>
+    <p>In this practical, we will perform analysis of variance (ANOVA) tests using R.</p>
+
+    <h2>Aim: Analysis of Variance (ANOVA TESTS)</h2>
+    <p>The one-way analysis of variance (ANOVA), also known as one-factor ANOVA, is an extension of independent
+        two-samples t-test for comparing means in a situation where there are more than two groups. In one-way ANOVA,
+        the data is organized into several groups based on one single grouping variable (also called factor variable).
+        This tutorial describes the basic principle of the one-way ANOVA test and provides practical ANOVA test examples
+        in R software.</p>
+    <p>We use <code>aov()</code> when we would like to fit an ANOVA model and view the results in an ANOVA summary
+        table.</p>
+    <p>We use <code>anova()</code> when we would like to compare the fit of nested regression models to determine if a
+        regression model with a certain set of coefficients offers a significantly better fit than a model with only a
+        subset of the coefficients.</p>
+
+    <h2>R Code</h2>
+    <h3>A]</h3>
+    <pre><code>
+data("warpbreaks")
+head(warpbreaks)
+summary(warpbreaks)
+
+Model1 <- aov(breaks ~ wool + tension, data = warpbreaks)
+summary(Model1)
+plot(Model1)
+
+Model_2 <- aov(breaks ~ wool + tension + wool:tension, data = warpbreaks)
+summary(Model_2)
+plot(Model_2)
+    </code></pre>
+
+    <h3>B]</h3>
+    <pre><code>
+data("PlantGrowth")
+head(PlantGrowth)
+summary(PlantGrowth)
+levels(PlantGrowth$group)
+weight <- PlantGrowth$weight
+group <- PlantGrowth$group
+mean(weight)
+mean(weight[group == "ctrl"])
+mean(weight[group == "trt1"])
+mean(weight[group == "trt2"])
+tapply(weight, group, mean)
+tapply(weight, group, length)
+aov(weight ~ group)
+    </code></pre>
+
+
+    <h1>Practical 5: Linear Regression</h1>
+    <p>In this practical, we will perform linear regression analysis using R.</p>
+
+    <h2>Aim: Linear Regression</h2>
+    <p>Linear regression is a statistical method used to model the relationship between two or more variables. It is
+        commonly used to predict the value of one variable based on the value of another variable. This practical aims
+        to demonstrate how to perform linear regression analysis in R.</p>
+
+    <h2>R Code</h2>
+    <pre><code>
+height <- c(43, 65, 6, 6, 36, 56, 4356, 43, 7564, 7, 4764, 75)
+weight <- -c(43, 5, 6, 6, 36, 465, 65, 7, 65467, 547, 647, 45)
+student <- lm(weight ~ height)
+print(student)
+predict(student, data.frame(height = 199), interval = "confidence")
+
+df <- datasets::cars
+my_lm <- lm(dist ~ speed, data = df)
+print(my_lm)
+variable_speed <- data.frame(speed = c(11, 12, 432, 354, 4, 56, 54, 6, 56))
+linear_model <- lm(dist ~ speed, data = df)
+predict(linear_model, newdata = variable_speed)
+predict(linear_model, newdata = variable_speed, interval = "confidence")
+    </code></pre>
+
+    <h1>Practical 6: Hypothesis Testing</h1>
+
+    <pre><code>
+x <- rnorm(100)
+y <- rnorm(100)
+t.test(x, mu = 5)
+t.test(x, y)
+t.test(x, mu = 2, alternative = 'greater')
+t.test(x, mu = 5)
+t.test(x, y)
+t.test(x, mu = 2, alternative = 'greater')
+    </code></pre>
+
+
+
+    <h1>Practical 7: Decision Tree</h1>
+    <p>In this practical, we will use the decision tree algorithm to build a predictive model using R.</p>
+
+    <h2>Aim: Decision Tree</h2>
+    <p>The decision tree is a popular machine learning algorithm used for both classification and regression tasks. It
+        builds a tree-like structure where each internal node represents a "test" on an attribute, each branch
+        represents the outcome of the test, and each leaf node represents a class label or prediction.</p>
+
+    <h2>R Code</h2>
+    <pre><code>
+# Install and load the required packages
+install.packages("party")
+library(party)
+
+# Assuming readingSkills is your dataset
+# Replace "readingSkills" with the name of your actual dataset
+input.dat <- readingSkills[c(1:105), ]
+
+# Specify the output PNG file with width and height
+png(file = "decision_tree.png", width = 800, height = 600)
+
+# Fit the decision tree model
+output.tree <- ctree(nativeSpeaker ~ age + shoeSize + score, data = input.dat)
+
+# Plot the decision tree
+plot(output.tree)
+
+# Close the PNG device
+dev.off()
+    </code></pre>
+
+
+    <h1>Practical 8: Logistic Regression</h1>
+    <pre><code>
+input <- mtcars[,c("am","cyl","hp","wt")]
+am.data <- glm(formula=am ~ cyl + hp + wt, data=input, family = binomial)
+print(summary(am.data))
+    </code></pre>
+
+
+    <h1>Practical 9: K-means Clustering</h1>
+    <p>In this practical, we will perform K-means clustering analysis using R.</p>
+
+    <h2>Aim: K-means Clustering</h2>
+    <p>K-means clustering is a popular unsupervised learning algorithm used for clustering data into groups based on
+        similarities. This practical aims to demonstrate how to perform K-means clustering in R.</p>
+
+    <h2>R Code</h2>
+    <pre><code>
+# Install and load the 'ggplot2' package
+install.packages("ggplot2")
+library(ggplot2)
+
+# Load the iris dataset
+df <- iris
+head(iris)
+
+# Create a scatter plot of Petal.Length vs. Petal.Width colored by Species
+ggplot(df, aes(Petal.Length, Petal.Width)) +
+  geom_point(aes(col = Species), size = 4)
+
+# Set seed for reproducibility
+set.seed(101)
+
+# Perform K-means clustering with k=3
+irisCluster <- kmeans(df[,1:4], center = 3, nstart = 20)
+irisCluster
+
+# Install and load the 'cluster' package
+install.packages("cluster")
+library(cluster)
+
+# Visualize the clusters using clusplot
+clusplot(iris, irisCluster$cluster, color = T, shade = T, labels = 0, lines = 0)
+    </code></pre>
+
+
+</body>
+
+</html>
